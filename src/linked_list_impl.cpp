@@ -21,9 +21,8 @@ public:
 };
 
 class LinkedList {
-    Node* head;
-
 public:
+    Node* head;
     LinkedList() {
         head = nullptr;
     }
