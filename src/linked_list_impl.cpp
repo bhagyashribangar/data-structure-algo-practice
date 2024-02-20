@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-// Represent NOde of a linked list
+// Represent Node of a linked list
 class Node {
 public:
     int data;

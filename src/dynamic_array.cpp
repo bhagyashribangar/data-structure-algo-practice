@@ -11,6 +11,49 @@ private:
 public:
     DynamicArray() : array(nullptr), size(0), capacity(0) {}
 
+    // copy constructor
+    DynamicArray(const DynamicArray& other) : size(other.size), capacity(other.capacity) {
+        array = new int[capacity];
+        for (int i = 0; i < size; i++) {
+            array[i] = other.array[i];
+        }
+    }
+
+    // move constructor
+    DynamicArray(DynamicArray&& other) noexcept : array(other.array), size(other.size), capacity(other.capacity) {
+        other.array = nullptr;
+        other.size = 0;
+        other.capacity = 0;
+    }
+
+    // copy assignment operator
+    DynamicArray& operator=(const DynamicArray& other) {
+        if (this != &other) {
+            delete[] array;
+            size = other.size;
+            capacity = other.capacity;
+            array = new int[capacity];
+            for (int i = 0; i < size; i++) {
+                array[i] = other.array[i];
+            } 
+        }
+        return *this;
+    }
+
+    // move assignment operator
+    DynamicArray& operator=(DynamicArray&& other) noexcept {
+        if (this != &other) {
+            delete[] array;
+            array = other.array;
+            size = other.size;
+            capacity = other.capacity;
+            other.array = nullptr;
+            other.size = 0;
+            other.capacity = 0;
+        }
+        return *this;
+    }
+
     void pushBack(int value) {
         if (size == capacity) {
             // If the array is full, double its capacity

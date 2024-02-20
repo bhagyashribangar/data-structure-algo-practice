@@ -1,4 +1,8 @@
+// BFS: Level Order Traversal
+// DFS: Inorder, Preorder, Postorder Traversal
+
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class TreeNode {
@@ -14,6 +18,10 @@ public:
     BinaryTree() : root(nullptr) {};
     void insert(int value) {
         insertNode(root, value);
+    }
+
+    void levelOrderTravesal() const {
+        levelOrderTravesal(root);
     }
 
     void inorderTraversal() const {
@@ -54,6 +62,31 @@ private:
                 insertNode(node->right, val);
             }
         }
+    }
+
+    void levelOrderTravesal(const TreeNode* node) const {
+        if (node == nullptr) {
+            // Empty tree
+            return;
+        }
+
+        queue<TreeNode*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            TreeNode* currNode = q.front();
+            cout << currNode->data << " ";
+            q.pop();
+
+            if (currNode->left) {
+                q.push(currNode->left);
+            }
+
+            if (currNode->right) {
+                q.push(currNode->right);
+            }
+        }
+        cout << endl;
     }
 
     void preorderTraversal(const TreeNode* node) const {
@@ -141,6 +174,8 @@ int main()
     tree.insert(6);
     tree.insert(4);
     tree.insert(5);
+    cout << "Level Order Traversal is: ";
+    tree.levelOrderTravesal();
     cout << "Inorder Traversal is: ";
     tree.inorderTraversal();
     cout << endl;
